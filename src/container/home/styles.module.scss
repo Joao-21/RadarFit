@@ -1,0 +1,16 @@
+.cart_container {
+    display: flex;
+    flex-direction: row;
+    grid-area: "cart";
+    margin: 24px;
+    background: #bbbdd6;
+    color: black;
+}
+
+.container {
+    grid-template-areas: "topbar"
+        "cart";
+    display: grid;
+    grid-template-rows: 10% 90%;
+    height: 100%;
+}

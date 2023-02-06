@@ -1,0 +1,14 @@
+.container {
+    padding: 16px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    flex-direction: row !important;
+    background-color: #5b5f97 !important;
+    grid-area: topbar !important;
+}
+
+.typography_title {
+    display: flex;
+    align-items: center;
+    font-size: 2rem !important;
+}
