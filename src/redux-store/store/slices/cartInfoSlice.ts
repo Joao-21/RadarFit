@@ -9,7 +9,7 @@ export const cartInfoSlice = createSlice({
     setChangeCartDetailsStatus: (state) => {
       state.status = !state.status;
     },
-    setAddedProduct: (state, action: PayloadAction<ProductProps[]>) => {
+    setHandleAddedItems: (state, action: PayloadAction<ProductProps[]>) => {
       state.items = action.payload;
     },
     setChangeSnackbarStatus: (state) => {
@@ -20,7 +20,7 @@ export const cartInfoSlice = createSlice({
 
 export const {
   setChangeCartDetailsStatus,
-  setAddedProduct,
+  setHandleAddedItems,
   setChangeSnackbarStatus,
 } = cartInfoSlice.actions;
 

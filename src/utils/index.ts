@@ -12,3 +12,19 @@ export const quantityPerProduct = (cartItems: ProductProps[]) => {
 
   return quantityPerItem;
 };
+
+export const formatMoney = (value: number) => {
+  const formatedValue = value.toLocaleString("pt-br", {
+    style: "currency",
+    currency: "BRL",
+  });
+  return formatedValue;
+};
+
+export const cartItemsSum = (cartItems: ProductProps[]) => {
+  const sumItems = cartItems.reduce((acc, item) => {
+    acc = acc + item.price;
+    return acc;
+  }, 0);
+  return sumItems;
+};

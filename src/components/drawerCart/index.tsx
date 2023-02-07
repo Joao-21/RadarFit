@@ -1,24 +1,35 @@
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux-store/store";
-import { quantityPerProduct } from "../../utils";
+import { cartItemsSum, formatMoney, quantityPerProduct } from "../../utils";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import PrimaryButton from "../primaryButton";
 import styles from "./styles.module.scss";
+import { setHandleAddedItems } from "../../redux-store/store/slices/cartInfoSlice";
 
 const DrawerCart = () => {
+  const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cartDetails.items);
 
   const filteredCartItems = [...new Set(cartItems)];
 
   const quantityPerItem = quantityPerProduct(cartItems);
 
-  const handleDeleteItem = (id: number) => {};
+  const sumTotalItems = cartItemsSum(cartItems);
+
+  const handleDeleteItem = (id: number) => {
+    const indexToRemove = cartItems.findIndex((item) => item.id === id);
+    const cartItemsCopy = [...cartItems];
+    cartItemsCopy.splice(indexToRemove, 1);
+
+    dispatch(setHandleAddedItems(cartItemsCopy));
+  };
 
   const handleFinishBuy = () => {};
+
   return (
     <Box sx={{ width: 280 }} className={styles.container}>
       <Box className={styles.title_container}>
@@ -41,7 +52,9 @@ const DrawerCart = () => {
                   quantityPerItem[item.id].quantity}
               </Typography>
               <Typography>{item.name}</Typography>
-              <Typography>{item.price}</Typography>
+              <Typography>
+                {formatMoney(item.price * quantityPerItem[item.id].quantity)}
+              </Typography>
               <Box>
                 <IconButton
                   style={{ color: "#484b78" }}
@@ -57,8 +70,9 @@ const DrawerCart = () => {
         )}
         {filteredCartItems.length !== 0 && (
           <Box className={styles.button_container}>
+            <Typography>Total troca: {formatMoney(sumTotalItems)}</Typography>
             <PrimaryButton
-              buttonName="Finalizar Compra"
+              buttonName="Finalizar Troca"
               handleClick={handleFinishBuy}
             />
           </Box>

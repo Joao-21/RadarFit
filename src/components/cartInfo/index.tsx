@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import DrawerCart from "../drawerCart";
 import { RootState } from "../../redux-store/store";
 import styles from "./styles.module.scss";
+import { cartItemsSum, formatMoney } from "../../utils";
 
 const CartInfo = () => {
   const dispatch = useDispatch();
@@ -23,19 +24,16 @@ const CartInfo = () => {
 
   const cartItems = useSelector((state: RootState) => state.cartDetails.items);
 
-  const cartItemsSum = cartItems.reduce((acc, item) => {
-    acc = acc + item.price;
-    return acc;
-  }, 0);
+  const sumTotalItems = cartItemsSum(cartItems);
 
   return (
     <Box className={styles.box_container}>
       <Box className={styles.box_content}>
         <Typography className={styles.typography}>
-          Saldo: R$ {userCoins}
+          Saldo: {formatMoney(userCoins)}
         </Typography>
         <Typography className={styles.typography}>
-          Carrinho: R$ {cartItemsSum}
+          Carrinho: {formatMoney(sumTotalItems)}
         </Typography>
       </Box>
       <IconButton

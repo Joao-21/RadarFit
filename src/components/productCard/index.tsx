@@ -10,12 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { ProductProps } from "../../mockedData";
 import { RootState } from "../../redux-store/store";
 import {
-  setAddedProduct,
+  setHandleAddedItems,
   setChangeSnackbarStatus,
 } from "../../redux-store/store/slices/cartInfoSlice";
-import { quantityPerProduct } from "../../utils";
-import PrimaryButton from "../primaryButton";
+import { cartItemsSum, formatMoney, quantityPerProduct } from "../../utils";
 import styles from "./styles.module.scss";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import IconButton from "@mui/material/IconButton";
 
 interface CardInfoProps {
   product: ProductProps;
@@ -29,18 +30,15 @@ const ProductCard = ({ product }: CardInfoProps) => {
 
   const quantityPerItem = quantityPerProduct(cartItems);
 
-  const cartItemsSum = cartItems.reduce((acc, item) => {
-    acc = acc + item.price;
-    return acc;
-  }, 0);
+  const sumTotalItems = cartItemsSum(cartItems);
 
   const handleAddProduct = () => {
-    if (cartItemsSum + product.price > userCoins) {
+    if (sumTotalItems + product.price > userCoins) {
       dispatch(setChangeSnackbarStatus());
     } else {
       const payload = [...cartItems];
       payload.push(product);
-      dispatch(setAddedProduct(payload));
+      dispatch(setHandleAddedItems(payload));
     }
   };
 
@@ -54,7 +52,7 @@ const ProductCard = ({ product }: CardInfoProps) => {
       />
       <CardContent className={styles.card_content}>
         <Typography component="div" variant="h6">
-          {product.name}: R${product.price}
+          {product.name}: {formatMoney(product.price)}
         </Typography>
       </CardContent>
       <CardActions className={styles.card_actions}>
@@ -64,10 +62,14 @@ const ProductCard = ({ product }: CardInfoProps) => {
             ? quantityPerItem[product.id].quantity
             : 0}
         </Typography>
-        <PrimaryButton
-          buttonName="Add Produto"
-          handleClick={handleAddProduct}
-        />
+        <IconButton
+          style={{ color: "#484b78" }}
+          aria-label="delete"
+          component="label"
+          onClick={handleAddProduct}
+        >
+          <AddCircleIcon />
+        </IconButton>
       </CardActions>
     </Card>
   );
