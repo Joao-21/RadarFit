@@ -52,9 +52,7 @@ const CartInfo = () => {
         onClose={openCartDetails}
         onOpen={openCartDetails}
       >
-        <Box sx={{ width: 250 }}>
-          <DrawerCart />
-        </Box>
+        <DrawerCart />
       </SwipeableDrawer>
     </Box>
   );

@@ -14,6 +14,7 @@ import {
   setChangeSnackbarStatus,
 } from "../../redux-store/store/slices/cartInfoSlice";
 import { quantityPerProduct } from "../../utils";
+import PrimaryButton from "../primaryButton";
 import styles from "./styles.module.scss";
 
 interface CardInfoProps {
@@ -63,13 +64,10 @@ const ProductCard = ({ product }: CardInfoProps) => {
             ? quantityPerItem[product.id].quantity
             : 0}
         </Typography>
-        <Button
-          className={styles.button}
-          variant="contained"
-          onClick={handleAddProduct}
-        >
-          Add Produto
-        </Button>
+        <PrimaryButton
+          buttonName="Add Produto"
+          handleClick={handleAddProduct}
+        />
       </CardActions>
     </Card>
   );

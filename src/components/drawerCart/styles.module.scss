@@ -1,0 +1,45 @@
+.container {
+    margin: 16px;
+    border: 1px solid #484b78;
+    border-radius: 4px;
+    height: 100%;
+    overflow: auto;
+}
+
+.title_container {
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title_typo {
+    font-size: 18px !important
+}
+
+.typo_radar {
+    font-size: 18px !important;
+    display: flex;
+    justify-content: center;
+    color: #484b78;
+}
+
+.not_found_container {
+    display: flex;
+    justify-content: center;
+    font-size: 22px !important;
+    padding: 16px 0px;
+}
+
+.button_container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px
+}
+
+.info_container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 3fr 2fr 1fr;
+    padding: 8px 8px 0px 8px;
+}

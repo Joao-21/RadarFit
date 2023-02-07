@@ -11,4 +11,4 @@ export const productsListInitialState = {
   productList: [] as ProductProps[],
 };
 
-export const userInitialState = { coins: 450 };
+export const userInitialState = { coins: 600 };
