@@ -1,0 +1,23 @@
+.card_container {
+    display: grid;
+    background: #dddeeb;
+    color: black;
+    box-shadow: 1px 1px 1px 1px #484b78 !important;
+}
+
+.card_content {
+    padding: 12px !important;
+    width: 100%;
+    position: relative;
+}
+
+.card_actions {
+    padding: 8px 8px 0px 8px !important;
+    justify-content: space-between;
+}
+
+.card_media {
+    height: 140px !important;
+    width: 200px !important;
+    object-fit: contain !important;
+}
