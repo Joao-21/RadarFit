@@ -6,7 +6,10 @@ import { productsListMocked } from "../../mockedData";
 import { setProductsList } from "../../redux-store/store/slices/productsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux-store/store";
-import { setChangeSnackbarStatus } from "../../redux-store/store/slices/cartInfoSlice";
+import {
+  setChangeSnackbarStatus,
+  setChangeSuccessSnackbar,
+} from "../../redux-store/store/slices/cartInfoSlice";
 import { SnackBar } from "../../components/snackbar";
 
 const ProductsContainer = () => {
@@ -20,8 +23,16 @@ const ProductsContainer = () => {
     (state: RootState) => state.cartDetails.snackbarErrorStatus
   );
 
+  const openSnackbarSuccess = useSelector(
+    (state: RootState) => state.cartDetails.snackbarSuccessStatus
+  );
+
   const handleToogleSnackBar = () => {
     dispatch(setChangeSnackbarStatus());
+  };
+
+  const handleToogleSnackBarSuccess = () => {
+    dispatch(setChangeSuccessSnackbar());
   };
 
   useEffect(() => {
@@ -50,6 +61,12 @@ const ProductsContainer = () => {
         onClose={handleToogleSnackBar}
         type="error"
         message="Você não tem moedas suficientes para adicionar esse item!"
+      />
+      <SnackBar
+        open={openSnackbarSuccess}
+        onClose={handleToogleSnackBarSuccess}
+        type="success"
+        message="Troca realizada com sucesso!"
       />
     </Box>
   );

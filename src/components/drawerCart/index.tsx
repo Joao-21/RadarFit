@@ -8,11 +8,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import PrimaryButton from "../primaryButton";
 import styles from "./styles.module.scss";
-import { setHandleAddedItems } from "../../redux-store/store/slices/cartInfoSlice";
+import {
+  resetStore,
+  setChangeSuccessSnackbar,
+  setHandleAddedItems,
+} from "../../redux-store/store/slices/cartInfoSlice";
+import { setUserCoins } from "../../redux-store/store/slices/userSlice";
 
 const DrawerCart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cartDetails.items);
+  const userCoins = useSelector((state: RootState) => state.user.coins);
 
   const filteredCartItems = [...new Set(cartItems)];
 
@@ -28,7 +34,12 @@ const DrawerCart = () => {
     dispatch(setHandleAddedItems(cartItemsCopy));
   };
 
-  const handleFinishBuy = () => {};
+  const handleFinishBuy = () => {
+    const newUserCoins = userCoins - sumTotalItems;
+    dispatch(setUserCoins(newUserCoins));
+    dispatch(resetStore());
+    dispatch(setChangeSuccessSnackbar());
+  };
 
   return (
     <Box sx={{ width: 280 }} className={styles.container}>

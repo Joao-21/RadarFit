@@ -15,6 +15,13 @@ export const cartInfoSlice = createSlice({
     setChangeSnackbarStatus: (state) => {
       state.snackbarErrorStatus = !state.snackbarErrorStatus;
     },
+    setChangeSuccessSnackbar: (state) => {
+      state.snackbarSuccessStatus = !state.snackbarSuccessStatus;
+    },
+    resetStore: (state) => {
+      state.status = initialState.status;
+      state.items = initialState.items;
+    },
   },
 });
 
@@ -22,6 +29,8 @@ export const {
   setChangeCartDetailsStatus,
   setHandleAddedItems,
   setChangeSnackbarStatus,
+  setChangeSuccessSnackbar,
+  resetStore,
 } = cartInfoSlice.actions;
 
 export default cartInfoSlice.reducer;
