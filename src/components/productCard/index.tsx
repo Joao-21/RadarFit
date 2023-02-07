@@ -9,8 +9,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { ProductProps } from "../../mockedData";
 import { RootState } from "../../redux-store/store";
-import { setAddedProduct } from "../../redux-store/store/slices/cartInfoSlice";
-import { quantityOnCart } from "../../utils";
+import {
+  setAddedProduct,
+  setChangeSnackbarStatus,
+} from "../../redux-store/store/slices/cartInfoSlice";
+import { quantityPerProduct } from "../../utils";
 import styles from "./styles.module.scss";
 
 interface CardInfoProps {
@@ -21,13 +24,23 @@ const ProductCard = ({ product }: CardInfoProps) => {
   const dispatch = useDispatch();
 
   const cartItems = useSelector((state: RootState) => state.cartDetails.items);
+  const userCoins = useSelector((state: RootState) => state.user.coins);
 
-  const quantityPerItem = quantityOnCart(cartItems);
+  const quantityPerItem = quantityPerProduct(cartItems);
+
+  const cartItemsSum = cartItems.reduce((acc, item) => {
+    acc = acc + item.price;
+    return acc;
+  }, 0);
 
   const handleAddProduct = () => {
-    const payload = [...cartItems];
-    payload.push(product);
-    dispatch(setAddedProduct(payload));
+    if (cartItemsSum + product.price > userCoins) {
+      dispatch(setChangeSnackbarStatus());
+    } else {
+      const payload = [...cartItems];
+      payload.push(product);
+      dispatch(setAddedProduct(payload));
+    }
   };
 
   return (

@@ -1,6 +1,6 @@
 import { ProductProps } from "../mockedData";
 
-export const quantityOnCart = (cartItems: ProductProps[]) => {
+export const quantityPerProduct = (cartItems: ProductProps[]) => {
   const quantityPerItem = cartItems.reduce((acc: any, val) => {
     if (!acc[val.id])
       acc[val.id] = {

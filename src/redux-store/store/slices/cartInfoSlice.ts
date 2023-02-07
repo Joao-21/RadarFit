@@ -12,10 +12,16 @@ export const cartInfoSlice = createSlice({
     setAddedProduct: (state, action: PayloadAction<ProductProps[]>) => {
       state.items = action.payload;
     },
+    setChangeSnackbarStatus: (state) => {
+      state.snackbarErrorStatus = !state.snackbarErrorStatus;
+    },
   },
 });
 
-export const { setChangeCartDetailsStatus, setAddedProduct } =
-  cartInfoSlice.actions;
+export const {
+  setChangeCartDetailsStatus,
+  setAddedProduct,
+  setChangeSnackbarStatus,
+} = cartInfoSlice.actions;
 
 export default cartInfoSlice.reducer;

@@ -4,6 +4,7 @@ import { CartInfoProps } from "../types";
 export const cartInfoInitialState: CartInfoProps = {
   status: false,
   items: [] as ProductProps[],
+  snackbarErrorStatus: false,
 };
 
 export const productsListInitialState = {
