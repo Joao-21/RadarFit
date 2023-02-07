@@ -1,0 +1,17 @@
+.card_container {
+    display: grid;
+    background: #dddeeb;
+    color: black;
+    box-shadow: 1px 1px 1px 1px #484b78 !important;
+}
+
+.card_content {
+    padding: 12px !important;
+    width: 100%;
+    position: relative;
+}
+
+.card_actions {
+    padding: 0px;
+    justify-content: end;
+}

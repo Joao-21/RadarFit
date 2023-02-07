@@ -1,9 +1,23 @@
 import Typography from "@mui/material/Typography";
-import { IconButton } from "@mui/material";
+import { IconButton, SwipeableDrawer } from "@mui/material";
 import { Box } from "@mui/system";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { setChangeCartDetailsStatus } from "../../redux-store/store/slices/cartInfoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import DrawerCart from "../drawerCart";
+import { RootState } from "../../redux-store/store";
 
 const CartInfo = () => {
+  const dispatch = useDispatch();
+
+  const openCartDetails = () => {
+    dispatch(setChangeCartDetailsStatus());
+  };
+
+  const cartDetailsStatus = useSelector(
+    (state: RootState) => state.cartDetails.cartDetailsStatus
+  );
+
   return (
     <Box style={{ display: "flex", flexDirection: "row" }}>
       <Box
@@ -24,9 +38,20 @@ const CartInfo = () => {
         style={{ color: "white" }}
         aria-label="upload picture"
         component="label"
+        onClick={openCartDetails}
       >
         <ShoppingCartIcon />
       </IconButton>
+      <SwipeableDrawer
+        anchor="right"
+        open={cartDetailsStatus}
+        onClose={openCartDetails}
+        onOpen={openCartDetails}
+      >
+        <Box sx={{ width: 250 }}>
+          <DrawerCart />
+        </Box>
+      </SwipeableDrawer>
     </Box>
   );
 };
