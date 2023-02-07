@@ -1,3 +1,6 @@
+import { ProductProps } from "../../../mockedData";
+
 export interface CartInfoProps {
-  cartDetailsStatus: boolean;
+  status: boolean;
+  items: ProductProps[];
 }
