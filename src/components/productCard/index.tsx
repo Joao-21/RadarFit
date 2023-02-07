@@ -67,6 +67,7 @@ const ProductCard = ({ product }: CardInfoProps) => {
           aria-label="delete"
           component="label"
           onClick={handleAddProduct}
+          data-testid={`cart-${product.id}`}
         >
           <AddCircleIcon />
         </IconButton>

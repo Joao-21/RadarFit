@@ -38,9 +38,10 @@ const CartInfo = () => {
       </Box>
       <IconButton
         style={{ color: "white" }}
-        aria-label="upload picture"
+        aria-label="cart"
         component="label"
         onClick={openCartDetails}
+        data-testid="cartIcon"
       >
         <ShoppingCartIcon />
       </IconButton>
