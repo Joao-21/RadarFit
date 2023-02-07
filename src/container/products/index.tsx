@@ -19,19 +19,13 @@ const ProductsContainer = () => {
   }, []);
 
   return (
-    <Box className={styles.cart_container}>
-      <Box style={{ width: "100%", padding: "16px", overflow: "auto" }}>
-        <Grid container style={{ display: "grid", justifyContent: "center" }}>
-          <Typography
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              fontSize: "18px",
-            }}
-          >
+    <Box className={styles.products_container}>
+      <Box className={styles.products_content}>
+        <Grid container className={styles.title_container}>
+          <Typography className={`${styles.typography} ${styles.title}`}>
             Use suas moedas RadarFit para trocar por produtos a sua escolha.
           </Typography>
-          <Typography style={{ display: "flex", justifyContent: "center" }}>
+          <Typography className={styles.typography}>
             Aproveite as oportunidades!
           </Typography>
         </Grid>

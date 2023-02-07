@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ProductProps } from "../../mockedData";
 import { RootState } from "../../redux-store/store";
 import { setAddedProduct } from "../../redux-store/store/slices/cartInfoSlice";
+import { quantityOnCart } from "../../utils";
 import styles from "./styles.module.scss";
 
 interface CardInfoProps {
@@ -21,20 +22,13 @@ const ProductCard = ({ product }: CardInfoProps) => {
 
   const cartItems = useSelector((state: RootState) => state.cartDetails.items);
 
+  const quantityPerItem = quantityOnCart(cartItems);
+
   const handleAddProduct = () => {
     const payload = [...cartItems];
     payload.push(product);
     dispatch(setAddedProduct(payload));
   };
-
-  const quantityOnCart = cartItems.reduce((acc: any, val) => {
-    if (!acc[val.id])
-      acc[val.id] = {
-        quantity: 1,
-      };
-    else acc[val.id]["quantity"]++;
-    return acc;
-  }, {});
 
   return (
     <Card className={styles.card_container}>
@@ -42,11 +36,7 @@ const ProductCard = ({ product }: CardInfoProps) => {
         component="img"
         src={product.image}
         alt=""
-        style={{
-          height: "140px",
-          width: "200px",
-          objectFit: "contain",
-        }}
+        className={styles.card_media}
       />
       <CardContent className={styles.card_content}>
         <Typography component="div" variant="h6">
@@ -56,12 +46,12 @@ const ProductCard = ({ product }: CardInfoProps) => {
       <CardActions className={styles.card_actions}>
         <Typography>
           Qtd no carrinho:
-          {quantityOnCart[product.id] !== undefined
-            ? quantityOnCart[product.id].quantity
+          {quantityPerItem[product.id] !== undefined
+            ? quantityPerItem[product.id].quantity
             : 0}
         </Typography>
         <Button
-          style={{ color: "#484b78", background: "#dddeeb" }}
+          className={styles.button}
           variant="contained"
           onClick={handleAddProduct}
         >

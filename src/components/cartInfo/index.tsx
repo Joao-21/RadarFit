@@ -6,6 +6,7 @@ import { setChangeCartDetailsStatus } from "../../redux-store/store/slices/cartI
 import { useDispatch, useSelector } from "react-redux";
 import DrawerCart from "../drawerCart";
 import { RootState } from "../../redux-store/store";
+import styles from "./styles.module.scss";
 
 const CartInfo = () => {
   const dispatch = useDispatch();
@@ -26,23 +27,15 @@ const CartInfo = () => {
     acc = acc + item.price;
     return acc;
   }, 0);
-  console.log("cartItemsSum", cartItemsSum);
+
   return (
-    <Box style={{ display: "flex", flexDirection: "row" }}>
-      <Box
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          marginRight: "16px",
-        }}
-      >
-        <Typography style={{ fontSize: "14px" }}>
-          Saldo: R$: {userCoins}
+    <Box className={styles.box_container}>
+      <Box className={styles.box_content}>
+        <Typography className={styles.typography}>
+          Saldo: R$ {userCoins}
         </Typography>
-        <Typography style={{ color: "red", fontSize: "14px" }}>
-          Carrinho: R$: {cartItemsSum}
+        <Typography className={styles.typography}>
+          Carrinho: R$ {cartItemsSum}
         </Typography>
       </Box>
       <IconButton

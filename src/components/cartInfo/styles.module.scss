@@ -1,0 +1,16 @@
+.box_container {
+    display: flex;
+    flex-direction: row;
+}
+
+.box_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+}
+
+.typography {
+    font-size: 14px;
+}
